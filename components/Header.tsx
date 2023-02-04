@@ -9,7 +9,7 @@ import {
 
 function Header() {
   return (
-    <header className="sticky top-0 z-50 p-5 grid grid-cols-3 shadow-lg md:px-10">
+    <header className="sticky top-0 z-50 p-5 bg-white grid grid-cols-3 shadow-lg md:px-10">
 
         {/* Left */}
         <div className="relative flex h-10 cursor-pointer my-auto " >
