@@ -1,11 +1,18 @@
 import Image from "next/image";
-import {MagnifyingGlassIcon} from "@heroicons/react/24/solid"
+import {
+  MagnifyingGlassIcon,
+  GlobeAltIcon,
+  Bars3Icon,
+  UserCircleIcon,
+
+} from "@heroicons/react/24/solid";
+
 function Header() {
   return (
-    <header className="sticky top-0 z-50 p-5 grid-cols-3 shadow-lg md:px-10">
+    <header className="sticky top-0 z-50 p-5 grid grid-cols-3 shadow-lg md:px-10">
 
         {/* Left */}
-        <div className="relative flex items-center h-10 cursor-pointer my-auto " >
+        <div className="relative flex h-10 cursor-pointer my-auto " >
           <Image 
             src='https://links.papareact.com/qd3' 
             layout="fill"
@@ -21,8 +28,14 @@ function Header() {
         </div>
 
         {/* Right */}
-        <div>
-          <p>Become a host</p>
+        <div className="flex items-center space-x-4 justify-end text-gray-500">
+          <p className="hidden md:inline cursor-pointer">Become a host</p>
+          <GlobeAltIcon className="h-6 cursor-pointer"/>
+          <div className="flex space-x-2 border-4 rounded-full">
+            <Bars3Icon className="h-6 cursor-pointer"/>
+            <UserCircleIcon className="h-6 cursor-pointer"/>
+          </div>
+
         </div>
     </header>
   )
