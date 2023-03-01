@@ -1,6 +1,11 @@
 import Image from "next/image";
 
-export default function MediumCard({ img, title}) {
+type MediumCardProps = {
+    img: string
+    title: string
+}
+
+export default function MediumCard({ img, title}: MediumCardProps) {
   return (
     <div className="cursor-pointer hover:scale-105 transform transition duration-300 ease-out">  
         <div className="relative h-80 w-80 ">
