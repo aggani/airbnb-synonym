@@ -3,9 +3,11 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Banner from '../components/Banner'
 import Header from '../components/Header'
+import LargeCard from '../components/LargeCard'
+import MediumCard from '../components/MediumCard'
 import SmallCard from '../components/smallCard'
 
-export default function Home({ exploreData }) {
+export default function Home({ exploreData, cardsData }) {
   return ( 
     <div >
       <Head>
@@ -31,17 +33,40 @@ export default function Home({ exploreData }) {
               />
             ))}
           </div>
-          
-           
         </section>
+
+        <section>
+          <h2 className='text-4xl font-semibold'>Live Anywhere</h2>
+          <div className='flex space-x-3 overflow-scroll scrollbar-hide p-3 m-3'>
+            {cardsData.map((item) =>(
+              <MediumCard
+                key = {item.img}
+                img = {item.img}
+                title = {item.title}
+              />
+            ))}
+          </div>
+        </section>
+        
+        <LargeCard 
+          img='https://links.papareact.com/4cj'
+          title='The Greatest Outfoors'
+          description='Wishlist curated by airbnb-synonym'
+          buttonText='Get Inspired'
+        />
       </main>
-      
     </div>
   )
 }
 
 export async function getStaticProps() {
+  
   const exploreData = await fetch('https://www.jsonkeeper.com/b/IPBM').
+  then(
+    (res) => res.json() // parse it to just give JSON data, otherwise it gives extra crap 
+  );
+  
+  const cardsData = await fetch('https://www.jsonkeeper.com/b/VHHT').
   then(
     (res) => res.json()
   );
@@ -50,6 +75,7 @@ export async function getStaticProps() {
       // props ek object hai, jisme key-value pairs hain 
     props: {
       exploreData,  // exploreData: exploreData
+      cardsData,
     },
   };
 }
