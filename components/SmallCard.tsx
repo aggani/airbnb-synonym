@@ -3,7 +3,7 @@ import Image from "next/image";
 type SmallCardProps = {
     img: string
     location: string
-    distance: number
+    distance: string
 }
 function SmallCard({img, location, distance}: SmallCardProps){
     return (

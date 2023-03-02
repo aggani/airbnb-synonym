@@ -11,7 +11,7 @@ import SmallCard from '../components/SmallCard'
 type asyncDataProps = {
   exploreData: {
     img: string
-    distance: number
+    distance: string
     location: string
   }
 
@@ -23,7 +23,7 @@ type asyncDataProps = {
 
 type exploreDataProps = {
   img: string
-  distance: number
+  distance: string
   location: string
 }
 
@@ -32,7 +32,7 @@ type cardsDataProps = {
   title: string
 }
 
-export default function Home({ exploreData, cardsData }:asyncDataProps) {
+export default function Home({ exploreData, cardsData }:any) {
   return ( 
     <div >
       <Head>
@@ -49,21 +49,30 @@ export default function Home({ exploreData, cardsData }:asyncDataProps) {
           
           {/* Pull data from API end points */ }
           <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-            {exploreData.map(({ img, distance, location }: exploreDataProps) =>(
+            {/* {exploreData(({ img, distance, location }: exploreDataProps) =>(
               <SmallCard 
                 key={img}
                 img = {img}
                 distance = {distance}
                 location = {location}
               />
-            ))}
+            ))} */}
+            { exploreData?.map((item: any) => (
+              <SmallCard
+                key={item.img}
+                img = {item.img}
+                distance = {item.distance}
+                location = {item.location}
+              />
+            ))
+            }
           </div>
         </section>
 
         <section>
           <h2 className='text-4xl font-semibold'>Live Anywhere</h2>
           <div className='flex space-x-3 overflow-scroll scrollbar-hide p-3 m-3'>
-            {cardsData.map(({ img, title}: cardsDataProps) =>(
+            {cardsData?.map(({ img, title}: cardsDataProps) =>(
               <MediumCard
                 key = {img}
                 img = {img}
@@ -89,18 +98,32 @@ export async function getStaticProps() {
   
   const exploreData = await fetch('https://www.jsonkeeper.com/b/IPBM').
   then(
-    (res) => res.json() // parse it to just give JSON data, otherwise it gives extra crap 
+    (res) => 
+      
+      res.json() // parse it to just give JSON data, otherwise it gives extra crap 
+  
   );
   
+  // const resData = await exploreData.json()
+  // console.log(resData)
+
+  // const resDataToMap:(any) = []
+  // for (var a of resData){
+  //   resDataToMap.push(a)
+  // }
+  
+
   const cardsData = await fetch('https://www.jsonkeeper.com/b/VHHT').
   then(
     (res) => res.json()
   );
+    
 
   return{
       // props ek object hai, jisme key-value pairs hain 
     props: {
-      exploreData,  // exploreData: exploreData
+      //resDataToMap,  // exploreData: exploreData
+      exploreData,
       cardsData,
     },
   };
