@@ -8,7 +8,31 @@ import LargeCard from '../components/LargeCard'
 import MediumCard from '../components/MediumCard'
 import SmallCard from '../components/SmallCard'
 
-export default function Home({ exploreData, cardsData }) {
+type asyncDataProps = {
+  exploreData: {
+    img: string
+    distance: number
+    location: string
+  }
+
+  cardsData: {
+    img: string
+    title: string
+  }
+}
+
+type exploreDataProps = {
+  img: string
+  distance: number
+  location: string
+}
+
+type cardsDataProps = {
+  img: string
+  title: string
+}
+
+export default function Home({ exploreData, cardsData }:asyncDataProps) {
   return ( 
     <div >
       <Head>
@@ -25,7 +49,7 @@ export default function Home({ exploreData, cardsData }) {
           
           {/* Pull data from API end points */ }
           <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-            {exploreData.map(({ img, distance, location }) =>(
+            {exploreData.map(({ img, distance, location }: exploreDataProps) =>(
               <SmallCard 
                 key={img}
                 img = {img}
@@ -39,11 +63,11 @@ export default function Home({ exploreData, cardsData }) {
         <section>
           <h2 className='text-4xl font-semibold'>Live Anywhere</h2>
           <div className='flex space-x-3 overflow-scroll scrollbar-hide p-3 m-3'>
-            {cardsData.map((item) =>(
+            {cardsData.map(({ img, title}: cardsDataProps) =>(
               <MediumCard
-                key = {item.img}
-                img = {item.img}
-                title = {item.title}
+                key = {img}
+                img = {img}
+                title = {title}
               />
             ))}
           </div>
