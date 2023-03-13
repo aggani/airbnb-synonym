@@ -8,31 +8,25 @@ import LargeCard from '../components/LargeCard'
 import MediumCard from '../components/MediumCard'
 import SmallCard from '../components/SmallCard'
 
-type asyncDataProps = {
-  exploreData: {
-    img: string
-    distance: string
-    location: string
-  }
-
-  cardsData: {
-    img: string
-    title: string
-  }
-}
-
 type exploreDataProps = {
   img: string
   distance: string
   location: string
 }
-
 type cardsDataProps = {
   img: string
   title: string
 }
+type asyncDataProps = {
+  exploreData: exploreDataProps[]
 
-export default function Home({ exploreData, cardsData }:any) {
+  cardsData: cardsDataProps[]
+}
+
+
+
+
+export default function Home({ exploreData, cardsData }:asyncDataProps) {
   return ( 
     <div >
       <Head>
