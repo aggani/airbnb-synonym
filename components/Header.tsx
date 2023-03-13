@@ -19,7 +19,7 @@ function Header() {
   const [searchInput, setSearchInput] = useState('');
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-  const [numberOfGuests, setNumberOfGuests] = useState(1);
+  const [numberOfGuests, setNumberOfGuests] = useState<any | 1>(1);
 
   const handleSelect = (ranges: any) => {
     setStartDate(ranges.selection.startDate);
@@ -30,6 +30,10 @@ function Header() {
     startDate: startDate,
     endDate: endDate,
     key: 'selection'
+  }
+
+  const resetInput = () => {
+    setSearchInput("");
   }
 
   return (
@@ -66,6 +70,7 @@ function Header() {
             <Bars3Icon className="h-6 cursor-pointer"/>
             <UserCircleIcon className="h-6 cursor-pointer"/>
           </div>
+        </div>  
         
         {/* CONDITIONAL RENDERING */}
         { searchInput && (
@@ -89,14 +94,14 @@ function Header() {
             </div>
 
             <div className="flex">
-              <button className="flex-grow text-gray-500">Cancel</button>
+              <button onClick={resetInput} className="flex-grow text-gray-500">Cancel</button>
               <button className="flex-grow text-red-400">Search</button>
             </div>
 
           </div>
         )}
 
-        </div>
+        
     </header>
   )
 }
